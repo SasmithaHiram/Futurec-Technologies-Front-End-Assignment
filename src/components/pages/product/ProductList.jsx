@@ -71,7 +71,7 @@ const ProductList = () => {
     <>
       <div className="max-w-6xl mx-auto mt-12 px-4">
         <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
-          Product List
+          Products
         </h1>
 
         <div className="overflow-x-auto bg-white shadow-xl rounded-2xl">
