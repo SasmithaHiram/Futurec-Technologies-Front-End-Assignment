@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { registerUser } from "../../../api/api";
@@ -59,6 +58,9 @@ const Register = () => {
         phoneNumber: "",
         password: "",
       });
+      setTimeout(() => {
+        setSuccess("");
+      }, 5000);
     } catch (err) {
       setError(err.response?.data.message || "Registration failed");
       alert("Registration failed");

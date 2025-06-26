@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { loginUser } from "../../../api/api";
+import { useNavigate } from "react-router-dom";
+
 const Login = () => {
+  const navigate = useNavigate();
+
   const [loginForm, setLoginForm] = useState({ username: "", password: "" });
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
@@ -22,6 +26,7 @@ const Login = () => {
     try {
       const res = await loginUser(loginForm).then((res) => {
         setSuccess(res.data.message);
+        navigate("/product/create");
       });
     } catch (err) {
       setError(err.response.data.message);
@@ -70,9 +75,6 @@ const Login = () => {
             </Link>
           </p>
           {error && <p className="text-red-500 mt-3 text-center">{error}</p>}
-          {success && (
-            <p className="text-green-500 mt-3 text-center">{success}</p>
-          )}
         </div>
       </div>
     </>
