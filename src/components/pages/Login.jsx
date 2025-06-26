@@ -1,6 +1,19 @@
 import { Link } from "react-router-dom";
+import { loginUser } from "../../api/api";
+import { useState } from "react";
 
 const Login = () => {
+  const [loginForm, setLoginForm] = useState({ username: "", password: "" });
+
+  const handleChange = (e) => {
+    setLoginForm({ ...loginForm, [e.target.name]: e.target.value });
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    console.log(loginForm);
+  };
+
   return (
     <>
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-100 via-white to-green-100">
@@ -11,15 +24,21 @@ const Login = () => {
             </h2>
             <p className="text-sm text-gray-500 mt-1">Login to your account</p>
           </div>
-          <form className="space-y-4">
+          <form onSubmit={handleLogin} className="space-y-4">
             <input
-              type="email"
-              placeholder="Email"
+              type="text"
+              name="username"
+              placeholder="Username"
+              value={loginForm.username}
+              onChange={handleChange}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
             />
             <input
               type="password"
+              name="password"
               placeholder="Password"
+              value={loginForm.password}
+              onChange={handleChange}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
             />
             <button
