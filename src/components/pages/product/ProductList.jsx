@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAllProducts } from "../../../api/api";
+import CreateProduct from "./CreateProduct";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -8,12 +9,6 @@ const ProductList = () => {
   useEffect(() => {
     fetchProducts();
   }, []);
-
-  if (products.length === 0) {
-    return (
-      <p className="text-center mt-10 text-gray-500">No products found.</p>
-    );
-  }
 
   const fetchProducts = async () => {
     try {
@@ -24,6 +19,12 @@ const ProductList = () => {
       setError(err.message || "Failed to fetch products");
     }
   };
+
+  if (products.length === 0) {
+    return (
+      <p className="text-center mt-10 text-gray-500">No products found.</p>
+    );
+  }
 
   return (
     <>
