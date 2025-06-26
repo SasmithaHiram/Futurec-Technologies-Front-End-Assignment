@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { registerUser } from "../../api/api";
+import { registerUser } from "../../../api/api";
 
 const Register = () => {
   const [form, setForm] = useState({

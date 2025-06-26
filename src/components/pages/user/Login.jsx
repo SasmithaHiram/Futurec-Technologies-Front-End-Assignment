@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { loginUser } from "../../api/api";
+import { loginUser } from "../../../api/api";
 const Login = () => {
   const [loginForm, setLoginForm] = useState({ username: "", password: "" });
   const [success, setSuccess] = useState("");
