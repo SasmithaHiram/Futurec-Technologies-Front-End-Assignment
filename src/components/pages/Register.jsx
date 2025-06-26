@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -9,12 +10,60 @@ const Register = () => {
     password: "",
   });
 
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
+    setError("");
+    setSuccess("");
+
+    const { username, email, phoneNumber, password } = form;
+
+    if (!form.username || !form.email || !form.phoneNumber || !form.password) {
+      alert("All fields are required.");
+      setError("All fields are required.");
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^[0-9]{10}$/;
+
+    if (!emailRegex.test(email)) {
+      setError("Invalid email format.");
+      return;
+    }
+
+    if (!phoneRegex.test(phoneNumber)) {
+      setError("Phone number must be 10 digits.");
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters.");
+      return;
+    }
+
+    try {
+      const res = await axios.post(
+        "http://localhost:3000/api/user/register",
+        form
+      );
+      setSuccess(res.data.message);
+      setForm({
+        username: "",
+        email: "",
+        phoneNumber: "",
+        password: "",
+      });
+    } catch (err) {
+      setError(err.response?.data.message || "Registration failed");
+      alert("Registration failed");
+    }
   };
 
   return (
@@ -78,6 +127,10 @@ const Register = () => {
               Login
             </Link>
           </p>
+          {error && <p className="text-red-500 mt-3 text-center">{error}</p>}
+          {success && (
+            <p className="text-green-500 mt-3 text-center">{success}</p>
+          )}
         </div>
       </div>
     </>
