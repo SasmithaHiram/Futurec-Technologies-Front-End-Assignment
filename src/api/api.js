@@ -8,4 +8,4 @@ const API = axios.create({
 });
 
 export const registerUser = (data) => API.post("/user/register", data);
-export const loginUser = (data) => API.get("/user/login", data);
+export const loginUser = (data) => API.post("/user/login", data);

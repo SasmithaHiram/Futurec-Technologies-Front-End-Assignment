@@ -1,17 +1,32 @@
 import { Link } from "react-router-dom";
-import { loginUser } from "../../api/api";
 import { useState } from "react";
-
+import { loginUser } from "../../api/api";
 const Login = () => {
   const [loginForm, setLoginForm] = useState({ username: "", password: "" });
+  const [success, setSuccess] = useState("");
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setLoginForm({ ...loginForm, [e.target.name]: e.target.value });
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log(loginForm);
+
+    if (!loginForm.username || !loginForm.password) {
+      alert("All fields are required.");
+      setError("All fields are required.");
+      return;
+    }
+
+    try {
+      const res = await loginUser(loginForm).then((res) => {
+        setSuccess(res.data.message);
+      });
+    } catch (err) {
+      setError(err.response.data.message);
+      alert("Login failed.");
+    }
   };
 
   return (
@@ -54,6 +69,10 @@ const Login = () => {
               Register
             </Link>
           </p>
+          {error && <p className="text-red-500 mt-3 text-center">{error}</p>}
+          {success && (
+            <p className="text-green-500 mt-3 text-center">{success}</p>
+          )}
         </div>
       </div>
     </>

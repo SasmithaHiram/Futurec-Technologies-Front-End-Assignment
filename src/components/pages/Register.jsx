@@ -11,8 +11,9 @@ const Register = () => {
     password: "",
   });
 
-  const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [error, setError] = useState("");
+  
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
