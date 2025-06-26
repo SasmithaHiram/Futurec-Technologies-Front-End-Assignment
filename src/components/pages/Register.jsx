@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { registerUser } from "../../api/api";
 
 const Register = () => {
   const [form, setForm] = useState({
@@ -49,10 +50,7 @@ const Register = () => {
     }
 
     try {
-      const res = await axios.post(
-        "http://localhost:3000/api/user/register",
-        form
-      );
+      const res = await registerUser(form);
       setSuccess(res.data.message);
       setForm({
         username: "",
