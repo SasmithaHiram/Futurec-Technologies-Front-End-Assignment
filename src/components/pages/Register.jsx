@@ -1,6 +1,22 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Register = () => {
+  const [form, setForm] = useState({
+    username: "",
+    email: "",
+    phoneNumber: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <>
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-100 via-white to-blue-100">
@@ -14,25 +30,37 @@ const Register = () => {
             </p>
           </div>
 
-          <form className="space-y-4">
+          <form onSubmit={handleRegister} className="space-y-4">
             <input
               type="text"
+              name="username"
               placeholder="Username"
+              value={form.username}
+              onChange={handleChange}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <input
               type="email"
+              name="email"
               placeholder="Email"
+              value={form.email}
+              onChange={handleChange}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <input
               type="tel"
+              name="phoneNumber"
               placeholder="Phone Number"
+              value={form.phoneNumber}
+              onChange={handleChange}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <input
               type="password"
+              name="password"
               placeholder="Password"
+              value={form.password}
+              onChange={handleChange}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
 
@@ -46,9 +74,9 @@ const Register = () => {
 
           <p className="text-center text-sm text-gray-500">
             Already have an account?{" "}
-            <a href="/login" className="text-blue-600 hover:underline">
+            <Link to="/login" className="text-blue-600 hover:underline">
               Login
-            </a>
+            </Link>
           </p>
         </div>
       </div>
