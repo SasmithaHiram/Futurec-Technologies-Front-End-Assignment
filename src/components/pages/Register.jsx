@@ -10,13 +10,14 @@ const Register = () => {
               Create Your Account
             </h2>
             <p className="text-sm text-gray-500 mt-1">
-              Start your journey with us
+              Join us today! It’s quick and easy.
             </p>
           </div>
+
           <form className="space-y-4">
             <input
               type="text"
-              placeholder="Full Name"
+              placeholder="Username"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <input
@@ -25,10 +26,16 @@ const Register = () => {
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <input
+              type="tel"
+              placeholder="Phone Number"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <input
               type="password"
               placeholder="Password"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+
             <button
               type="submit"
               className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition duration-300"
@@ -36,11 +43,12 @@ const Register = () => {
               Register
             </button>
           </form>
+
           <p className="text-center text-sm text-gray-500">
             Already have an account?{" "}
-            <Link to="/login" className="text-blue-600 hover:underline">
-              Sign in
-            </Link>
+            <a href="/login" className="text-blue-600 hover:underline">
+              Login
+            </a>
           </p>
         </div>
       </div>
